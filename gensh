@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Eternity With You </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+    color:white;
+
+    background:
+    linear-gradient(rgba(10,5,20,0.75), rgba(20,10,40,0.9)),
+    url('https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?q=80&w=1974&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    position:relative;
+}
+
+/* RAIDEN OVERLAY */
+
+.raiden-overlay{
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,
+    rgba(180,120,255,0.25),
+    transparent 40%),
+
+    radial-gradient(circle at bottom,
+    rgba(255,160,255,0.15),
+    transparent 30%);
+
+    z-index:0;
+    pointer-events:none;
+}
+
+/* PETAL TRAIL */
+
+.petal{
+
+    position:fixed;
+
+    width:14px;
+    height:14px;
+
+    background:#ffb7ef;
+
+    border-radius:70% 0 70% 0;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    opacity:0.9;
+
+    animation:petalFade 2s linear forwards;
+}
+
+@keyframes petalFade{
+
+    0%{
+        transform:
+        translate(0,0)
+        rotate(0deg)
+        scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+        translate(var(--x), var(--y))
+        rotate(360deg)
+        scale(0);
+
+        opacity:0;
+    }
+}
+
+/* CLEAN CURSOR SLASH */
+
+.cursor-slash{
+
+    position:fixed;
+
+    width:180px;
+    height:3px;
+
+    pointer-events:none;
+
+    z-index:9998;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.2) 10%,
+        #ffffff 50%,
+        rgba(255,255,255,0.2) 90%,
+        transparent 100%
+    );
+
+    box-shadow:
+    0 0 8px #ffffff,
+    0 0 18px #d291ff,
+    0 0 30px #9d4edd;
+
+    transform-origin:center;
+
+    animation:cursorSlashAnim 0.28s ease-out forwards;
+}
+
+.cursor-slash::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.9),
+        transparent
+    );
+
+    filter:blur(1px);
+}
+
+@keyframes cursorSlashAnim{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        rotate(-45deg)
+        scaleX(0.2)
+        translateX(-20px);
+    }
+
+    20%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+        rotate(-45deg)
+        scaleX(1.3)
+        translateX(30px);
+    }
+}
+
+/* SCREEN SHAKE */
+
+body.shake{
+
+    animation:screenShake 0.4s ease;
+}
+
+@keyframes screenShake{
+
+    0% { transform:translate(0px,0px); }
+    20% { transform:translate(-10px,5px); }
+    40% { transform:translate(10px,-5px); }
+    60% { transform:translate(-8px,4px); }
+    80% { transform:translate(8px,-4px); }
+    100% { transform:translate(0px,0px); }
+}
+
+/* SCREEN FLASH */
+
+.screen-flash{
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,255,255,0.95),
+    rgba(210,145,255,0.7),
+    rgba(90,24,154,0.4));
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:99999;
+
+    animation:flashScreen 0.6s ease-out forwards;
+}
+
+@keyframes flashScreen{
+
+    0%{
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+/* MASSIVE RAIDEN SLASH */
+
+.raiden-slash{
+
+    position:fixed;
+
+    left:-20vw;
+    top:50%;
+
+    width:140vw;
+    height:12px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.2) 15%,
+        #ffffff 35%,
+        #f1cfff 50%,
+        #c77dff 70%,
+        transparent 100%
+    );
+
+    box-shadow:
+    0 0 10px #fff,
+    0 0 30px #d291ff,
+    0 0 80px #9d4edd;
+
+    transform:
+    rotate(-12deg)
+    scaleX(0);
+
+    transform-origin:center;
+
+    z-index:99998;
+
+    pointer-events:none;
+
+    animation:katanaSlash 0.55s cubic-bezier(.17,.67,.32,1) forwards;
+}
+
+@keyframes katanaSlash{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        rotate(-12deg)
+        scaleX(0);
+    }
+
+    20%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+        rotate(-12deg)
+        scaleX(1.15);
+    }
+}
+
+/* ELECTRO BURST */
+
+.electro-burst{
+
+    position:fixed;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,255,255,0.9),
+    rgba(210,145,255,0.5),
+    transparent 70%);
+
+    transform:
+    translate(-50%,-50%)
+    scale(0);
+
+    pointer-events:none;
+
+    z-index:99997;
+
+    animation:burst 0.7s ease-out forwards;
+}
+
+@keyframes burst{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        scale(0);
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,-50%)
+        scale(2.5);
+    }
+}
+
+/* MAIN CONTAINER */
+
+.container{
+
+    position:relative;
+    z-index:2;
+
+    width:90%;
+    max-width:950px;
+
+    margin:60px auto;
+
+    padding:50px;
+
+    border-radius:30px;
+
+    background:rgba(20,10,35,0.55);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 40px rgba(157,78,221,0.3),
+    0 0 120px rgba(157,78,221,0.15);
+
+    overflow:hidden;
+}
+
+/* DECOR */
+
+.container::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-20px;
+    right:20px;
+
+    font-size:120px;
+
+    color:rgba(255,255,255,0.06);
+
+    transform:rotate(-15deg);
+}
+
+/* TITLES */
+
+.title{
+
+    font-family:'Cinzel',serif;
+
+    text-align:center;
+
+    font-size:4rem;
+
+    color:#f1cfff;
+
+    text-shadow:
+    0 0 10px #c77dff,
+    0 0 30px #9d4edd;
+
+    animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        text-shadow:
+        0 0 10px #c77dff,
+        0 0 30px #9d4edd;
+    }
+
+    50%{
+
+        text-shadow:
+        0 0 20px #ffffff,
+        0 0 60px #c77dff;
+    }
+}
+
+.subtitle{
+
+    text-align:center;
+
+    margin-top:20px;
+
+    font-size:1.2rem;
+
+    color:#ead7ff;
+
+    margin-bottom:50px;
+}
+
+/* CHARACTER SECTION */
+
+.character-section{
+
+    display:flex;
+
+    gap:40px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    margin-bottom:50px;
+}
+
+.character-image{
+
+    flex:1;
+    min-width:250px;
+}
+
+.character-image img{
+
+    width:100%;
+
+    border-radius:25px;
+
+    border:2px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 30px rgba(157,78,221,0.5);
+
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.character-text{
+
+    flex:1;
+    min-width:250px;
+}
+
+.character-text h2{
+
+    color:#f1cfff;
+
+    margin-bottom:20px;
+
+    font-size:2rem;
+}
+
+.character-text p{
+
+    line-height:2;
+
+    color:#f3e8ff;
+}
+
+/* LETTER */
+
+.letter{
+
+    margin-top:30px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    line-height:2;
+
+    color:#f8edff;
+
+    position:relative;
+}
+
+.letter::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:10px;
+    right:20px;
+
+    font-size:30px;
+
+    color:#d291ff;
+}
+
+/* BUTTON */
+
+button{
+
+    display:block;
+
+    margin:50px auto;
+
+    padding:18px 45px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+        45deg,
+        #5a189a,
+        #9d4edd,
+        #c77dff
+    );
+
+    color:white;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:0.4s;
+
+    box-shadow:
+    0 0 20px rgba(157,78,221,0.5);
+}
+
+button:hover{
+
+    transform:scale(1.07);
+
+    box-shadow:
+    0 0 40px rgba(199,125,255,0.9);
+}
+
+/* SECRET */
+
+.secret{
+
+    max-height:0;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transition:1s ease;
+}
+
+.secret.show{
+
+    max-height:500px;
+
+    opacity:1;
+}
+
+.secret-content{
+
+    text-align:center;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.05);
+
+    color:#ffe6ff;
+
+    line-height:2;
+}
+
+/* FOOTER */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:60px;
+
+    opacity:0.7;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .title{
+        font-size:2.5rem;
+    }
+
+    .container{
+        padding:25px;
+    }
+
+    .character-section{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="raiden-overlay"></div>
+
+
+<div class="container">
+
+    <h1 class="title">Eternity With You</h1>
+
+    <p class="subtitle">
+        “Even eternity feels too short when I’m with you.”
+    </p>
+
+    <div class="character-section">
+
+        <div class="character-image">
+
+            <img src="https://i.redd.it/3ravi13dn7wa1.jpg">
+
+        </div>
+
+        <div class="character-text">
+
+            <h2>My Dearest Love</h2>
+
+            <p>
+                Like Raiden Shogun watching over Inazuma,
+                you protect us, our honour and me especially in ways that words fall short to explain.<br><br>
+
+                Every smile from you feels like lightning illuminating my darkest skies,
+                and every moment beside you feels peaceful beyond measureeee
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="letter">
+
+        My love,<br><br>
+
+        Every day, I fall for you more and more. The days seem short, yet so intense and good, when I am with you. I will always keep coming back to youuu<br><br>
+
+        You are the calm after every thunderstorm,
+        the warmth beneath moonlit sakura trees,
+        and the greatest blessing the universe has ever granted meeeeeeee<br><br>
+
+        No eternity could ever compare
+        to a single lifetime spent with youuuuuuuuu
+
+    </div>
+
+    <button onclick="revealSecret(event)">
+        Musou no Hitotachi ⚔️
+    </button>
+
+    <div class="secret" id="secret">
+
+        <div class="secret-content">
+
+            I promise to love you through every version of ourselves,
+            through every storm,
+            every dream,
+            every thoughtt<br><br>
+
+            In every universe...
+            my heart will always choose youuuu
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Cheers to us, forevermore
+    </div>
+
+</div>
+
+<script>
+
+/* PETAL CURSOR TRAIL */
+
+document.addEventListener('mousemove', e => {
+
+    const petal = document.createElement('div');
+
+    petal.classList.add('petal');
+
+    petal.style.left = e.clientX + 'px';
+
+    petal.style.top = e.clientY + 'px';
+
+    petal.style.setProperty(
+        '--x',
+        (Math.random()*120 - 60) + 'px'
+    );
+
+    petal.style.setProperty(
+        '--y',
+        (Math.random()*120 + 40) + 'px'
+    );
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{
+        petal.remove();
+    },2000);
+});
+
+/* CLEAN CURSOR KATANA SLASH */
+
+document.addEventListener('click', e => {
+
+    if(e.target.tagName === 'BUTTON') return;
+
+    const slash = document.createElement('div');
+
+    slash.classList.add('cursor-slash');
+
+    slash.style.left = (e.clientX - 90) + 'px';
+
+    slash.style.top = e.clientY + 'px';
+
+    document.body.appendChild(slash);
+
+    setTimeout(()=>{
+        slash.remove();
+    },280);
+});
+
+/* RAIDEN BURST */
+
+function revealSecret(event){
+
+    /* SHAKE */
+
+    document.body.classList.add('shake');
+
+    setTimeout(()=>{
+        document.body.classList.remove('shake');
+    },400);
+
+    /* FLASH */
+
+    const flash =
+    document.createElement('div');
+
+    flash.classList.add('screen-flash');
+
+    document.body.appendChild(flash);
+
+    setTimeout(()=>{
+        flash.remove();
+    },600);
+
+    /* MASSIVE SLASH */
+
+    const slash =
+    document.createElement('div');
+
+    slash.classList.add('raiden-slash');
+
+    document.body.appendChild(slash);
+
+    setTimeout(()=>{
+        slash.remove();
+    },700);
+
+    /* ELECTRO BURST */
+
+    const burst =
+    document.createElement('div');
+
+    burst.classList.add('electro-burst');
+
+    burst.style.left = '50%';
+    burst.style.top = '50%';
+
+    document.body.appendChild(burst);
+
+    setTimeout(()=>{
+        burst.remove();
+    },700);
+
+    /* REVEAL */
+
+    setTimeout(()=>{
+
+        document.getElementById('secret')
+        .classList.toggle('show');
+
+        window.scrollTo({
+            top:document.body.scrollHeight,
+            behavior:'smooth'
+        });
+
+    },300);
+}
+
+</script>
+
+</body>
+</html>
